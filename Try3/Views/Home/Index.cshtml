@@ -1,0 +1,46 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    /*
+<div class="text-center">
+    <table class="table">
+        <tr><td>Name</td><td>Id</td></tr>
+        @foreach (var item in Model)
+        {
+            <tr><td>@item.Name</td><td>@item.Id</td><td>@Html.ActionLink("Добавить в корзину", "AddToCart", "Home", new { id = item.Id, count = 1 }, null)</td></tr>
+        }
+    </table>
+</div>
+    */
+}
+
+<h1>Список книг</h1>
+<table class="table">
+    <tr><th>Название</th><th>Номер</th></tr>
+    @foreach (Book item in Model.Books)
+    {
+        <tr><td>@item.Name</td><td>@item.Id</td><td>@Html.ActionLink("Добавить в корзину", "AddToCart", "Home", new { id = item.Id, count = 1 }, null)</td></tr>
+}
+</table>
+<div class="nav">
+    
+</div>
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}

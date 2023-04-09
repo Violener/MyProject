@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Try3.Models.CartItem>
+
+<div class="text-center">
+    <table class="table">
+        <tr><td>Name</td></tr>
+        @foreach (var item in Model)
+        {
+            <tr><td>@item.book.Name</td></tr>
+        }
+    </table>
+</div>
