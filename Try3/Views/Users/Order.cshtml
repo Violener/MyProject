@@ -1,0 +1,21 @@
+﻿@model Order
+
+
+
+@{
+    ViewBag.Title = Model.UserName;
+}
+<h2>Пользователь @Model.UserName</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Items</dt>
+        @foreach (var item in Model.cart.items)
+        {
+            <dd>@item.book.Name</dd>
+        };
+
+
+        <dt>Имя</dt>
+        <dd>@Model.UserName</dd>
+    </dl>
+</div>

@@ -54,21 +54,26 @@ namespace Try3.Controllers
         {
 
           
-            Book book = bookContext.Books.FirstOrDefault(bokk => bokk.Id == id );
-            CartItem cart = new CartItem(book, count);
-            Cart c = new Cart(cart);
-            var hope = c.items.ToList();
+            
             
             if (HttpContext.Session.Keys.Contains("someKey"))
             {
-                List<CartItem> classCollection = HttpContext.Session.Get<List<CartItem>>("someKey");
-                classCollection.Add(cart);
-                HttpContext.Session.Set<List<CartItem>>("someKey", classCollection);
+                Book book = bookContext.Books.FirstOrDefault(bokk => bokk.Id == id);
+                CartItem cart = new CartItem(book, count);
+                
+                var classCollection = HttpContext.Session.Get<Cart>("someKey");
+                classCollection.items.Add(cart);
+                HttpContext.Session.Set<Cart>("someKey", classCollection);
                 
             }
             else
             {
-                HttpContext.Session.Set<List<CartItem>>("someKey", hope);
+                Book book = bookContext.Books.FirstOrDefault(bokk => bokk.Id == id);
+                CartItem cart = new CartItem(book, count);
+
+                Cart c = new Cart(cart);
+                var hope = c.items.ToList();
+                HttpContext.Session.Set<Cart>("someKey", c);
             }
             return RedirectToAction("Index");
         }
@@ -78,12 +83,15 @@ namespace Try3.Controllers
         {
             if (HttpContext.Session.Keys.Contains("someKey"))
             {
-                List<CartItem> classCollection = HttpContext.Session.Get<List<CartItem>>("someKey");
+                var classCollection = HttpContext.Session.Get<Cart>("someKey");
+                var c = classCollection.items.ToList();
 
-                return View(classCollection);
+                return View(c);
 
             }
             return View();
         }
+
+       
     }
 }

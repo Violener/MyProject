@@ -7,10 +7,16 @@ namespace Try3.Models
 {
     public class Cart
     {
-        public List<CartItem> items = new List<CartItem>();
+        public int ID { get; set; }
+        public List<CartItem> items;
         public CartItem item;
+        public Cart()
+        {
+            items = new List<CartItem>();
+        }
         public Cart(CartItem _item)
         {
+            items = new List<CartItem>();
             item = _item;
             items.Add(item);
         }

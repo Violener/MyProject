@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,16 @@ namespace Try3.Controllers
     public class UsersController : Controller
     {
         UserManager<User> _userManager;
+        BookContext bookContext;
+        private readonly IHttpContextAccessor context;
 
-        public UsersController(UserManager<User> userManager)
+
+
+        public UsersController(UserManager<User> userManager, BookContext book, IHttpContextAccessor _httpContextAccessor)
         {
+            context = _httpContextAccessor;
             _userManager = userManager;
+            bookContext = book;
         }
 
         public IActionResult Index() => View(_userManager.Users.ToList());
@@ -139,6 +146,16 @@ namespace Try3.Controllers
                 }
             }
             return View(model);
+        }
+        public IActionResult Order()
+        {
+            
+            string name = context.HttpContext.User.Identity.Name;
+            Cart cart = HttpContext.Session.Get<Cart>("someKey");
+            Order order = new Order(name,cart);
+            bookContext.Orders.Add(order);
+            return View(order);
+
         }
     }
 }

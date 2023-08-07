@@ -158,3 +158,4 @@ C:\Users\Master.1\source\repos\Try3\Try3\obj\Debug\netcoreapp3.1\Razor\Views\Rol
 C:\Users\Master.1\source\repos\Try3\Try3\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Edit.cshtml.g.cs
 C:\Users\Master.1\source\repos\Try3\Try3\obj\Debug\netcoreapp3.1\Razor\Views\Roles\Index.cshtml.g.cs
 C:\Users\Master.1\source\repos\Try3\Try3\obj\Debug\netcoreapp3.1\Razor\Views\Roles\UserList.cshtml.g.cs
+C:\Users\Master.1\source\repos\Try3\Try3\obj\Debug\netcoreapp3.1\Razor\Views\Users\Order.cshtml.g.cs
